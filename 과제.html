@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    		
+    		<!-- JS -->		
+    	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+         <link href="https://fonts.googleapis.com/css?family=Stylish&display=swap" rel="stylesheet">
+
+	<title>과제</title>
+	<style>
+	.type{
+		width: 1000px;
+		height: 100px;
+		margin: auto;
+		text-align: center;
+
+	}
+	.type2{
+		text-align: left;
+    margin: 0 200px 0 200px;
+	}
+	.type3{
+		
+		padding: 30px;
+  		
+	}
+  h2, h6{
+    display: inline;
+  }
+	</style>
+
+  <script>
+    function q2(){
+      let name = $('#input-name').val();
+      let count = $('#input-count').val();
+      let phone = $('#input-phone').val();
+      let adress = $('#input-adress').val();
+    }
+
+    function q3(){
+      type: "POST",
+            url: "http://spartacodingclub.shop/order",
+            data: {},
+    }
+      function q1() {
+        $('#names-q1').html('');
+      
+        $.ajax({
+            type: "GET",
+            url: "http://spartacodingclub.shop/order",
+            data: {},
+            success: function(response){
+              let aa = response[0]["oders"];
+              let tmpl_html = "";
+              for (var i=0; i<aa.length; i++){
+              let name_html = aa[i]['name'];
+              let count_html = aa[i]['count'];
+              let phone_html = aa[i]['phone'];
+              let adress_html = aa[i]['adress'];
+              let tmpl_html = '<tr>\
+                                <td>'+ name_html+'</td>\
+                                <td>'+ count_html+'</td>\
+                                <td>'+ phone_html+'</td>\
+                                <td>'+ adress_html+'</td>\
+                               </tr>'\
+
+              }
+
+              $('#names-q1').html(tmpl_html);
+            }
+          })
+      }
+    
+    </script>
+
+</head>
+<body>
+	<div class="type">
+	<img src="deadlift.jpg">
+	<div class="type2">
+		<h2>PT이용권</h2>
+		<h6>가격 1,000,000 / 100회</h6>
+		<br>
+    <br>
+		<p>이 상품은 멋진 몸을 원하는 사람들에게 좋은 운동코치에게 운동을 배울 수 있는 유용한 이용권입니다. 전국 어디서든 이용가능합니다. 멋진 몸 날씬한 몸매를 얻고 싶다면 지금 주문하세요!</p>
+		<h2>주문하기</h2>
+		<div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon1">이름</span>
+      </div>
+        <input type="text" class="form-control" id="input_name" aria-describedby="basic-addon1">
+    </div>
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <label class="input-group-text" for="inputGroupSelect01">수량</label>
+    </div>
+      <select class="custom-select" id="input_count">
+        <option selected>수량</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+      </select>
+    </div>
+		 <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon2">주소</span>
+      </div>
+        <input type="text" class="form-control" id="input_adress" aria-describedby="basic-addon2">
+      </div>
+    	<div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon3">전화번호</span>
+      </div>
+        <input type="text" class="form-control" id="input_phone" aria-describedby="basic-addon3">
+      </div>
+    	
+    
+    <div class="type3">
+    <p>
+    <button type="button" onclick="q2()" class="btn btn-secondary btn-lg btn-block">주문하기</button>
+	</p>
+  </div>
+  <table class="table table-hover">
+    <thread>
+      <tr>
+        <th>이름</th>
+        <th>수량</th>
+        <th>전화번호</th>
+        <th>주소</th>
+      </tr>
+    </thread>
+    <tbody>
+      <tr>
+        <td>이성찬</td>
+        <td>2</td>
+        <td>01012345678</td>
+        <td>경기도 용인시</td>
+      </tr>
+    </tbody>
+  </table>
+	</div>
+	</div>
+
+</body>
+
+</html>
+
