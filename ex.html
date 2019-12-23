@@ -19,15 +19,15 @@
     <script type="text/javascript">
 
     function sign(){
-            let name = $('#sign_name').val();
-            let password = $('#sign_password').val();
+            let sign_name = $('#sign_name').val();
+            let sign_password = $('#sign_password').val();
 
-            if (name == ''){
+            if (sign_name == ''){
                 alert('이름을 입력해 주세요.')
                 $('#sign_name').val();
                 return
             }
-            if (password == ''){
+            if (sign_password == ''){
                 alert('비밀번호를 입력해주세요.')
                 $('#sign_password').val();
                 return
@@ -36,19 +36,13 @@
              $.ajax({
                type: "GET",
                url: "/sign",
-               data: {name : name, password : password},
+               data: {name : sign_name, password : sign_password},
                success: function(response){
-                    let sign = response['sign']
+                   if(response.result == 'success'){
+                        alert('로그인 되었습니다~');
 
-                    if(sign == response['name'] && sign == response['password'])
-                    {
-                    alert("로그인 되었습니다!")
-                    }
-                    else {
-                    alert("다시 입력해 주세요!")
-                    }
+                   }
                 }
-
             })
         }
 
