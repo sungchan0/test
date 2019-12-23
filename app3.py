@@ -21,7 +21,7 @@ def listing():
     sign = db.sign.find_one({'name': name , 'password': password}, {'_id': 0})
 
 
-    return jsonify({'result': 'success', 'name': sign , 'password': sign})
+    return jsonify({'result': 'success'})
 
 
 
