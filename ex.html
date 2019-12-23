@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>나의 운동일지</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+
+    <!-- JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script type="text/javascript">
+
+    function sign(){
+            let name = $('#sign_name').val();
+            let password = $('#sign_password').val();
+
+            if (name == ''){
+                alert('이름을 입력해 주세요.')
+                $('#sign_name').val();
+                return
+            }
+            if (password == ''){
+                alert('비밀번호를 입력해주세요.')
+                $('#sign_password').val();
+                return
+            }
+
+             $.ajax({
+               type: "GET",
+               url: "/sign",
+               data: {name : name, password : password},
+               success: function(response){
+                    let sign = response['sign']
+
+                    if(sign == response['name'] && sign == response['password'])
+                    {
+                    alert("로그인 되었습니다!")
+                    }
+                    else {
+                    alert("다시 입력해 주세요!")
+                    }
+                }
+
+            })
+        }
+
+    </script>
+    <style>
+      .mytitle {
+        color: white;
+        text-align: center;
+        background-image: url('deadlift.jpg');
+        background-size: cover;
+        background-position: center;
+        width: 700px;
+        height: 500px;
+        border-radius: 10px;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .mytitle > h1 {
+        margin: 0 0 5px 0;
+      }
+
+      .mytitle > h3 {
+        margin: 5px 0 0 0;
+      }
+
+      .wrap {
+        width: 700px;
+        margin: 50px auto 0 auto;
+      }
+
+    </style>
+</head>
+<body>
+    <div class="wrap">
+      <div class="mytitle">
+        <h1>나의 운동일지</h1>
+       <h3>자신의 정보를 입력해주세요.</h3>
+      </div>
+      <div>
+          <input type="text" class="form-control" id="sign_name" placeholder="아이디" autofocus>
+      </div>
+        <div>
+            <input type="password" class="form-control" id="sign_password" placeholder="비밀번호">
+        </div>
+        <div>
+            <button type="submit" onclick="sign()" class="form-control btn btn-primary">로그인</button>
+        </div>
+        <div>
+        <button type="submit" class="form-control btn btn-success">회원가입</button>
+        </div>
+    </div>
+</body>
+</html>
