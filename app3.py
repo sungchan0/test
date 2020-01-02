@@ -20,6 +20,11 @@ def listing():
 
     sign = db.sign.find_one({'name': name , 'password': password}, {'_id': 0})
 
+    if(sign is None):
+        return jsonify({'result': 'fail'})
+    else:
+        return jsonify({'result': 'success'})
+
 
     return jsonify({'result': 'success'})
 
