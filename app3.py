@@ -26,7 +26,6 @@ def listing():
         return jsonify({'result': 'success'})
 
 
-    return jsonify({'result': 'success'})
 
 
 
