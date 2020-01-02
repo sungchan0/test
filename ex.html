@@ -17,7 +17,9 @@
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script type="text/javascript">
-
+    function move(){
+        location.href='localhost:5000/'
+    }
     function sign(){
             let sign_name = $('#sign_name').val();
             let sign_password = $('#sign_password').val();
@@ -39,9 +41,15 @@
                data: {name : sign_name, password : sign_password},
                success: function(response){
                    if(response.result == 'success'){
-                        alert('로그인 되었습니다~');
+                        alert('로그인 되었습니다!');
+                        location.href='localhost:5000/'
+
 
                    }
+                   else if(response.result == 'fail'){
+                        alert('다시 입력해주세요~');
+                   }
+
                 }
             })
         }
@@ -95,7 +103,7 @@
             <button type="submit" onclick="sign()" class="form-control btn btn-primary">로그인</button>
         </div>
         <div>
-        <button type="submit" class="form-control btn btn-success">회원가입</button>
+        <button type="submit" onclick="move()" class="form-control btn btn-success">회원가입</button>
         </div>
     </div>
 </body>
