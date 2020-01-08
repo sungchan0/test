@@ -1,11 +1,9 @@
-from flask import Flask, render_template, jsonify, request, session
-from flask.ext.session import Session
+from flask import Flask, render_template, jsonify, request
+
 
 app = Flask(__name__)
 
-SESSION_TYPE = 'redis'
-app.config.from_object(__name__)
-Session(app)
+
 
 import requests
 from bs4 import BeautifulSoup
