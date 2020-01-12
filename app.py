@@ -66,14 +66,14 @@ def memo():
 
 @app.route('/memo', methods=['GET'])
 def memo2():
-    data = request.args.get('data')
+    date = request.args.get('date')
     memo = request.args.get('memo')
 
-    memo1 = db.sign.find_one({'data': data, 'memo': memo}, {'_id': 0})
+    memo1 = db.sign.find_one({'date': date, 'memo': memo}, {'_id': 0})
 
 
 
-    return jsonify({'result' : 'success'})
+    return jsonify({'result' : 'success', 'memo' : memo1})
 
 
 
