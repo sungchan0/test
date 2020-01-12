@@ -48,7 +48,7 @@
           }
           }
         })
-
+    }
       function listing() {
       $.ajax({
         type: "GET",
@@ -63,10 +63,19 @@
       })
     }
 
+     function make_card(date, memo){
+     let temp = '<div>\
+                    <p>' +date+ '</p>\
+                    <p>' +memo+ '</p>\
+                 </div>';
+                 $('#memo').append(temp);
+                }
 
 
 
-     }
+
+
+
 
 
 
@@ -79,8 +88,9 @@
     <label for="Textarea1">메모</label>
     <textarea class="form-control" id="Textarea1" rows="3"></textarea>
     <button type="submit" onclick="memo()" class="form-control btn btn-primary">저장</button>
-    <div class="memo">
-        <h5></h5>
+    <div id="memo">
+        <p></p>
+        <p></p>
     </div>
 
 </div>
