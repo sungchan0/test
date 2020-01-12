@@ -44,8 +44,6 @@ def listing():
     name = request.args.get('name')
     password = request.args.get('password')
 
-
-
     sign = db.sign.find_one({'name': name , 'password': password}, {'_id': 0})
 
     if(sign is None):
@@ -60,7 +58,7 @@ def memo():
     memo_receive = request.form['memo']
     date_receive = request.form['date']
 
-    memo = {'memo': memo_receive, 'date' : date_receive}
+    memo = {'memo': memo_receive, 'date': date_receive}
 
     db.memo.insert_one(memo)
 
@@ -75,9 +73,9 @@ def memo2():
 
 
 
-    return jsonify({'result': 'success'})
+    return jsonify({'result' : 'success'})
 
 
 
 if __name__ == '__main__':
-   app.run('0.0.0.0',port=5000,debug=True)
+   app.run('0.0.0.0', port=5000, debug=True)
