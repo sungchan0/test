@@ -1,7 +1,8 @@
-from flask import Flask, render_template, jsonify, request
+from flask import Flask, render_template, jsonify, request,session
 
 
 app = Flask(__name__)
+app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 
 
 
@@ -49,6 +50,7 @@ def listing():
     if(sign is None):
         return jsonify({'result': 'fail'})
     else:
+        session['name'] = name
         return jsonify({'result': 'success'})
 
 
@@ -57,8 +59,10 @@ def listing():
 def memo():
     memo_receive = request.form['memo']
     date_receive = request.form['date']
+    name = session['name']
 
-    memo = {'memo': memo_receive, 'date': date_receive}
+
+    memo = {'memo': memo_receive, 'date': date_receive, 'name':name}
 
     db.memo.insert_one(memo)
 
@@ -68,12 +72,13 @@ def memo():
 def memo2():
     date = request.args.get('date')
     memo = request.args.get('memo')
+    name = session['name']
 
-    memo1 = db.sign.find_one({'date': date, 'memo': memo}, {'_id': 0})
+    # memo1 = list(db.memo.find({'date': date}, {'_id': 0}))
+    # TODO: 아이디를 찾아줘서 그 아이디에 저장된 정보만 출력되게 하기.
+    memo2 = list(db.memo.find({'name' : name, 'date': date}, {'_id': 0}))
 
-
-
-    return jsonify({'result' : 'success', 'memo' : memo1})
+    return jsonify({'result' : 'success', 'memo' : memo2})
 
 
 
