@@ -20,7 +20,7 @@
     <script>
     $( function() {
     $("#datepicker").datepicker();
-  } );
+    } );
 
      function memo(){
      let memo = $('#Textarea1').val();
@@ -41,36 +41,41 @@
         type: "POST",
         url: "/memo",
         data: {memo: memo, date: date},
-        success: function(response){
+        success: function(response){q
           if (response.result == 'success') {
             alert('저장 완료!');
             window.location.reload();
           }
           }
         })
-    }
-      function listing() {
+      }
+
+      $(document).ready(function(){
+        $('#memo').html('');
+        listing();
+        });
+
+      function listing(){
       $.ajax({
         type: "GET",
-        url: "/memo",
+        url: "/memo?date="+$("#datepicker").val(),
         data: {},
         success: function(response){
            let memo = response['memo'];
            for (let i = 0; i < memo.length; i++) {
+             $('#memo').html('');
              make_card(memo[i]['date'],memo[i]['memo'])
+
+             }
            }
-        }
-      })
+       })
+
     }
 
      function make_card(date, memo){
-     let temp = '<div>\
-                    <p>' +date+ '</p>\
-                    <p>' +memo+ '</p>\
-                 </div>';
+     let temp = '<p>' +date+ '</p><p>' +memo+ '</p>';
                  $('#memo').append(temp);
-                }
-
+                 }
 
 
 
@@ -83,7 +88,7 @@
 
 </head>
 <body>
-<p>Date: <input type="text" id="datepicker"></p>
+<p>Date: <input type="text" id="datepicker" onchange="listing()"></p>
 <div class="form-group">
     <label for="Textarea1">메모</label>
     <textarea class="form-control" id="Textarea1" rows="3"></textarea>
