@@ -8,7 +8,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="/resources/demos/style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='ex.css') }}">
 
     <!-- JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -18,7 +18,7 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script type="text/javascript">
     function move(){
-        location.href='localhost:5000/'
+        location.href='http://localhost:5000/join'
     }
     function sign(){
             let sign_name = $('#sign_name').val();
@@ -42,50 +42,18 @@
                success: function(response){
                    if(response.result == 'success'){
                         alert('로그인 되었습니다!');
-                        location.href='localhost:5000/'
-
-
-                   }
+                        window.location.href='http://localhost:5000/diary'
+                        }
                    else if(response.result == 'fail'){
-                        alert('다시 입력해주세요~');
-                   }
+                        alert('다시 입력해주세요!');
+                        }
 
                 }
             })
         }
 
     </script>
-    <style>
-      .mytitle {
-        color: white;
-        text-align: center;
-        background-image: url('deadlift.jpg');
-        background-size: cover;
-        background-position: center;
-        width: 700px;
-        height: 500px;
-        border-radius: 10px;
 
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-      }
-
-      .mytitle > h1 {
-        margin: 0 0 5px 0;
-      }
-
-      .mytitle > h3 {
-        margin: 5px 0 0 0;
-      }
-
-      .wrap {
-        width: 700px;
-        margin: 50px auto 0 auto;
-      }
-
-    </style>
 </head>
 <body>
     <div class="wrap">
