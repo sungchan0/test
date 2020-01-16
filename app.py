@@ -5,11 +5,6 @@ app = Flask(__name__)
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 
 
-
-import requests
-from bs4 import BeautifulSoup
-
-
 from pymongo import MongoClient
 client = MongoClient('localhost', 27017)
 db = client.dbsparta
@@ -74,11 +69,16 @@ def memo2():
     memo = request.args.get('memo')
     name = session['name']
 
-    # memo1 = list(db.memo.find({'date': date}, {'_id': 0}))
+    # memo1 = list(db.memo.find({'memo' : memo, 'date': date}, {'_id': 0}))
     # TODO: 아이디를 찾아줘서 그 아이디에 저장된 정보만 출력되게 하기.
-    memo2 = list(db.memo.find({'name' : name, 'date': date}, {'_id': 0}))
+    # memo2 = list(db.memo.find({'name' : name, 'date': date}, {'_id': 0}))
 
-    return jsonify({'result' : 'success', 'memo' : memo2})
+    if(date is not ''):
+        memo2 = list(db.memo.find({'name': name, 'date': date}, {'_id': 0}))
+        return jsonify({'result' : 'success', 'memo' : memo2})
+    else:
+        memo2 = list(db.memo.find({'name': name}, {'_id': 0}))
+        return jsonify({'result' : 'success', 'memo' : memo2})
 
 
 
