@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify, request,session
+from flask import Flask, render_template, jsonify, request, session
 
 
 app = Flask(__name__)
@@ -27,13 +27,20 @@ def saving():
     name_receive = request.form['name']
     password_receive = request.form['password']
 
+    # sign = {'name' : name_receive, 'password' : password_receive}
+
+    if ('name' is name_receive):
+        print(2)
+        return jsonify({'result': 'fail'})
+    else:
+        sign = {'name': name_receive, 'password': password_receive}
+        db.sign.insert_one(sign)
+        print(1)
+        return jsonify({'result': 'success'})
 
 
-    sign = {'name' : name_receive, 'password' : password_receive}
 
-    db.sign.insert_one(sign)
-
-    return jsonify({'result': 'success'})
+    # return jsonify({'result': 'success'})
 
 @app.route('/sign', methods=['GET'])
 def listing():
@@ -66,17 +73,19 @@ def memo():
 @app.route('/memo', methods=['GET'])
 def memo2():
     date = request.args.get('date')
-    memo = request.args.get('memo')
-    name = session['name']
+    # memo = request.args.get('memo')
+    name = session['name'] # TODO: 로그인한 회원정보에 메모를 저장하여 로그인한 정보의 메모만 불러오게 연결할 수 있게 session사용.
 
     # memo1 = list(db.memo.find({'memo' : memo, 'date': date}, {'_id': 0}))
     # TODO: 아이디를 찾아줘서 그 아이디에 저장된 정보만 출력되게 하기.
     # memo2 = list(db.memo.find({'name' : name, 'date': date}, {'_id': 0}))
 
     if(date is not ''):
+        # TODO: date가 공백이 아니면 'memo'라는 key에서 name과 date를 찾아 화면에 띄워주기.
         memo2 = list(db.memo.find({'name': name, 'date': date}, {'_id': 0}))
         return jsonify({'result' : 'success', 'memo' : memo2})
     else:
+        # TODO: date가 공백이면 저장되어 있는 전체메모를 화면에 띄워주기.
         memo2 = list(db.memo.find({'name': name}, {'_id': 0}))
         return jsonify({'result' : 'success', 'memo' : memo2})
 
