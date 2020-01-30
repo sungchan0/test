@@ -29,20 +29,15 @@ def saving():
 
     sign = {'name' : name_receive, 'password' : password_receive}
 
+    sign2 = db.sign.find_one({'name' : name_receive})
 
 
-    sign2 = db.sign.find_one({'name'})
+    if(sign2 is None):
+        db.sign.insert_one(sign)
+        return jsonify({'result': 'success'})
 
-    for name_receive in sign:
-
-        if(name_receive in sign2['name']):
-
-            print(2)
-            return jsonify({'result': 'fail'})
-        else:
-            db.sign.insert_one(sign)
-            print(1)
-            return jsonify({'result': 'success'})
+    else:
+        return jsonify({'result': 'fail'})
 
 
 
