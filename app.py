@@ -27,16 +27,22 @@ def saving():
     name_receive = request.form['name']
     password_receive = request.form['password']
 
-    # sign = {'name' : name_receive, 'password' : password_receive}
+    sign = {'name' : name_receive, 'password' : password_receive}
 
-    if ('name' is name_receive):
-        print(2)
-        return jsonify({'result': 'fail'})
-    else:
-        sign = {'name': name_receive, 'password': password_receive}
-        db.sign.insert_one(sign)
-        print(1)
-        return jsonify({'result': 'success'})
+
+
+    sign2 = db.sign.find_one({'name'})
+
+    for name_receive in sign:
+
+        if(name_receive in sign2['name']):
+
+            print(2)
+            return jsonify({'result': 'fail'})
+        else:
+            db.sign.insert_one(sign)
+            print(1)
+            return jsonify({'result': 'success'})
 
 
 
